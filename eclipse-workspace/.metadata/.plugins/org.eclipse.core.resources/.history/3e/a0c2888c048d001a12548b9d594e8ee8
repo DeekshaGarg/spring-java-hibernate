@@ -1,0 +1,20 @@
+package com.example.moviecatalogue;
+
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MoviecatalogueApplication {
+
+	public static void main(String[] args) {
+	
+		SpringApplication.run(MoviecatalogueApplication.class, args);
+		
+		SpringApplication app = new SpringApplication(MoviecatalogueApplication.class);
+	    app.setBannerMode(Banner.Mode.OFF);
+	    app.setLazyInitialization(true);
+	    app.run(args);
+	}
+
+}

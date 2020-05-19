@@ -1,0 +1,28 @@
+package com.example.moviecatalogue;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MovieController {
+	
+	@Autowired
+	User user;
+	
+	@PostMapping(path="/create",consumes="application/json",produces="application/json")
+	public ResponseEntity<ResponseModel> createUser() {
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseModel("User created successfully"));
+	}
+	
+	@GetMapping(path="/find",consumes="application/json",produces="application/json")
+	public List<User> findUser() {
+		return user.getAllUser();
+	}
+
+}

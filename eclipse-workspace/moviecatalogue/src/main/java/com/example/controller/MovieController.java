@@ -1,0 +1,91 @@
+package com.example.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.dao.User;
+import com.example.dao.UserRepository;
+import com.example.exception.ResourceNotFoundException;
+
+@RestController
+public class MovieController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	private static Map<String, User> userRepo = new HashMap<>();
+	static {
+		User honey = new User("John", "john@gmail.com", 1111);
+
+		userRepo.put(honey.getName(), honey);
+
+		User almond = new User("Almond", "almond@gmail.com", 22222);
+
+		userRepo.put(almond.getName(), almond);
+	}
+
+	@PostMapping(path = "/create", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<ResponseModel> createUser() {
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseModel("User created successfully"));
+	}
+
+	@GetMapping(path = "/find", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Object> findUser() {
+		return ResponseEntity.status(HttpStatus.OK).body(userRepo.values());
+	}
+
+	@GetMapping(path = "/users")
+	public List<User> getUsers() throws Exception {
+		return userRepository.findAll();
+	}
+
+	@GetMapping(path = "/users/{userId}")
+	public ResponseEntity<User> getUserById(@PathVariable("userId") Long userId)
+			throws ResourceNotFoundException {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found " + userId));
+		return ResponseEntity.ok().body(user);
+	}
+	
+	@PostMapping("/createUser")
+    public User createEmployee(@Valid @RequestBody User employee) {
+        return userRepository.save(employee);
+    }
+	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable("id") Long id,  @Valid @RequestBody User userDetails) throws ResourceNotFoundException {
+		User user=userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not foundto update"+id) ) ;
+		user.setEmail(userDetails.getEmail());
+		user.setName(userDetails.getName());
+		user.setPhoneNumber(userDetails.getPhoneNumber());
+		
+		final User updatedUser=userRepository.save(user);
+		return ResponseEntity.ok(updatedUser);
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public Map<String,Boolean> deleteUser(@PathVariable("id") Long id) throws ResourceNotFoundException{
+		
+		User user=userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not foundto update"+id) ) ;
+		userRepository.delete(user);
+		Map<String,Boolean> response=new HashMap<String, Boolean>();
+		response.put("deleted", Boolean.TRUE);
+		return response;
+	}
+
+
+}

@@ -1,0 +1,43 @@
+package demo;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import com.google.gson.*;
+
+import javax.xml.ws.Response;
+
+public class Test {
+
+	public static void main(String[] args) {
+		String REQUEST_URL = "";
+							
+		  try {
+			  URL url = new URL("http://www.xyz.com/node1");
+			  URLConnection conn = url.openConnection();
+			  conn.connect();
+				BufferedReader in = new BufferedReader(
+					new InputStreamReader(url.openStream()));
+				String inputLine;
+				String jsonString;
+				while ((inputLine = in.readLine()) != null) {
+					jsonString = inputLine;
+				}
+				in.close();
+				//Create gson
+		                Gson gson = new GsonBuilder().create();
+				Response r = gson.fromJson(jsonString, Response.class);
+				///LOG.info("MyGSON:" + r.toString());
+			} catch (IOException e) {
+		  		e.getMessage();
+					e.printStackTrace();
+			} catch (Exception e) {
+					e.getMessage();
+					e.printStackTrace();
+			}
+
+	}
+
+}

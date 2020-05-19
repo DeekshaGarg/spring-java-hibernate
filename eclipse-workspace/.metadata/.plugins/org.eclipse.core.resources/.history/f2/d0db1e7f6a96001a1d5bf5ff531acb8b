@@ -1,0 +1,9 @@
+<hibernate-mapping>
+	<class name="Employee" table="emp">
+		<id name="id" column="eid">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name" column="ename" length="30" not-null="true"/>
+		<property name="email" length="30" not-null="true"/>
+	</class>
+</hibernate-mapping>

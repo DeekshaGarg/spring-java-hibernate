@@ -1,0 +1,47 @@
+package com.example.moviecatalogue;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
+public class User {
+	
+	private long id;
+	private String name;
+	private String email;
+	private long phoneNumber;
+
+	public User() {
+	
+	}
+	
+	public User(String name,String email, long phoneNumber) {
+		this.name = name;
+		this.email = email;
+		this.phoneNumber=phoneNumber;
+	}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getId() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+	
+
+	
+	
+
+}

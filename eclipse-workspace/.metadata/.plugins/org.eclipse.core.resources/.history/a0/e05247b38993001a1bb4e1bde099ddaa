@@ -1,0 +1,37 @@
+package com.example.moviecatalogue;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MovieController {
+	
+	private static Map<String, Product> userRepo = new HashMap<>();
+	   static {
+	      User honey = new User("John","john@gmail.com");
+	      
+	      userRepo.put(honey.getName(), honey);
+	      
+	      Product almond = new Product();
+	      almond.setId("2");
+	      almond.setName("Almond");
+	      userRepo.put(almond.getId(), almond);
+	   }
+	
+	@PostMapping(path="/create",consumes="application/json",produces="application/json")
+	public ResponseEntity<ResponseModel> createUser() {
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseModel("User created successfully"));
+	}
+	
+	@GetMapping(path="/find",consumes="application/json",produces="application/json")
+	public ResponseEntity<User> findUser() {
+		return ResponseEntity.status(HttpStatus.OK).body(new )
+	}
+
+}

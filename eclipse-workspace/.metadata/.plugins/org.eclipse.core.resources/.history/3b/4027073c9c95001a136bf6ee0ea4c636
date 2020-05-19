@@ -1,0 +1,70 @@
+package com.example.controller;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
+public class User {
+	
+	private long id;
+	private String name;
+	private String email;
+	private long phoneNumber;
+
+	public User() {
+	
+	}
+	
+	public User(String name,String email, long phoneNumber) {
+		this.name = name;
+		this.email = email;
+		this.phoneNumber=phoneNumber;
+	}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getId() {
+		return id;
+	}
+	
+	@Column(name="name", nullable=false)
+	public String getName() {
+		return name;
+	}
+	
+	@Column(name="email_id", nullable=false)
+	public String getEmail() {
+		return email;
+	}
+	
+	@Column(name="phone_number", nullable=false)
+	public long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+
+	
+	
+
+}

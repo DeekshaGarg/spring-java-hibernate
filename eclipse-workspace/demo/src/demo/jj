@@ -1,0 +1,11 @@
+create database movie_rating_db;
+use movie_rating_db;
+create table movie_ratings{
+    movie_id Integer,
+    rating Integer
+};
+
+select movie_id, avg(ratings) as avg_rating 
+from movie_ratings 
+group by movie_id 
+order by avg_rating, movie_id desc limit 10;

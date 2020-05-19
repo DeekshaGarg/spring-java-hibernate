@@ -1,0 +1,7 @@
+<hibernate-mapping>
+	<session-factory>
+		<property name="hibernate.connection.url">jdbc</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+	</session-factory>
+
+</hibernate-mapping>

@@ -1,0 +1,12 @@
+package com.example.moviecatalogue;
+
+public class ResponseModel {
+public String message;
+
+public ResponseModel(String message) {
+	this.message=message;
+
+}
+
+
+}

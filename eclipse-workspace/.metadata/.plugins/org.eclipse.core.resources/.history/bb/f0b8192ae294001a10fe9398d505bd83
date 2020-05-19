@@ -1,0 +1,4 @@
+logging.level.root=DEBUG
+spring.main.log-startup-info=false
+spring.datasource.username=sa
+spring.datasource.password=mypass

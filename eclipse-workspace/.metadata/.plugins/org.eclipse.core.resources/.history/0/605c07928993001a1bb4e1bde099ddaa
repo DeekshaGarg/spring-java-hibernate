@@ -1,0 +1,36 @@
+package com.example.moviecatalogue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class User {
+	private String name;
+	private String email;
+
+	public User(String name,String email) {
+		this.name = name;
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+	
+	public List<User> getAllUser() {
+		User user1=new User("John");
+		User user2=new User("Dev");
+		List<User> list= new ArrayList();
+		list.add(user1);
+		list.add(user2);
+		return list;
+	}
+	
+	
+
+}
